@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:handling_network_connectivity/utiliities/enums.dart';
+import 'package:handling_network_connectivity/utils/enums.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 Future<void> setupSnackBarUI() async {
