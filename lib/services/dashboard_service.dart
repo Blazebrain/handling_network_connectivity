@@ -10,13 +10,17 @@ class DashboardService {
   final _apiService = locator<ApiService>();
 
   Future<List<CharacterModel>?> getCharactersDetails() async {
-    await Future.delayed(const Duration(seconds: 5));
-    final response = await _apiService.get(ApiConstants.getCharacters);
+    try {
+      final response = await _apiService.get(ApiConstants.getCharacters);
 
-    if (response != null) {
-      final charactersList = CharacterResponseModel.fromJson(response).results;
+      if (response != null) {
+        final charactersList =
+            CharacterResponseModel.fromJson(response).results;
 
-      return charactersList;
+        return charactersList;
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 }

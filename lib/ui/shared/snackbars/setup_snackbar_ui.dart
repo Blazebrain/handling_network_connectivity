@@ -28,7 +28,7 @@ Future<void> setupSnackBarUI() async {
     config: SnackbarConfig(
       backgroundColor: Colors.red,
       textColor: Colors.white,
-      snackPosition: SnackPosition.TOP,
+      snackPosition: SnackPosition.BOTTOM,
       snackStyle: SnackStyle.GROUNDED,
       borderRadius: 48,
       icon: const Icon(

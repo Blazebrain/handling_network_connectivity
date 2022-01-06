@@ -7,13 +7,43 @@ import 'package:stacked/stacked.dart';
 class HomeViewModel extends StreamViewModel {
   final _dashboardService = locator<DashboardService>();
   final _connectivityService = locator<ConnectionStatusSingleton>();
+
   List<CharacterModel>? charactersList = [];
-  bool? connectionValue;
+  bool connectionStatus = false;
+  bool hasCalled = false;
+  bool locked = false;
+
   Future<void> getCharacters() async {
-    charactersList =
-        await runBusyFuture(_dashboardService.getCharactersDetails());
+    if (connectionStatus == true) {
+      charactersList = await runBusyFuture(
+        _dashboardService.getCharactersDetails(),
+        throwException: true,
+      ).onError((error, stackTrace) {
+        connectionStatus == false;
+        notifyListeners();
+      });
+      locked = true;
+      hasCalled = true;
+      notifyListeners();
+    } else {
+      print('Internet Connectivity Error');
+    }
+  }
+
+  Stream<bool> checkConnectivity() async* {
+    yield await _connectivityService.checkInternetConnection();
   }
 
   @override
-  Stream get stream => _connectivityService.connectionChange;
+  Stream get stream => checkConnectivity();
+
+  bool get status {
+    stream.listen((event) {
+      connectionStatus = event;
+      notifyListeners();
+      if (connectionStatus == true && hasCalled == false) getCharacters();
+    });
+
+    return connectionStatus;
+  }
 }

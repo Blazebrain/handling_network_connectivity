@@ -17,9 +17,7 @@ class HomeView extends StatelessWidget {
         return SafeArea(
           child: Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors
-                  .primaries[Random().nextInt(Colors.primaries.length)]
-                  .withOpacity(0.5),
+              backgroundColor: viewModel.status ? Colors.green : Colors.red,
               centerTitle: true,
               title: const Text(
                 'Characters List',
@@ -29,6 +27,12 @@ class HomeView extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
+              actions: [
+                Text(
+                  viewModel.status ? "Online" : "Offline",
+                  style: const TextStyle(color: Colors.black),
+                )
+              ],
             ),
             body: viewModel.isBusy
                 ? const Center(
@@ -43,9 +47,10 @@ class HomeView extends StatelessWidget {
                             itemCount: viewModel.charactersList!.length,
                             itemBuilder: (context, index) {
                               return Card(
-                                color: Colors.primaries[Random()
-                                        .nextInt(Colors.primaries.length)]
-                                    .withOpacity(0.5),
+                                color: Colors.blue[300],
+                                // Colors.primaries[Random()
+                                //         .nextInt(Colors.primaries.length)]
+                                //     .withOpacity(0.5),
                                 elevation: 1.0,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(16),

@@ -8,6 +8,7 @@
 
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import '../services/api_service.dart';
 import '../services/connectivity_service.dart';
@@ -21,6 +22,7 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
       environment: environment, environmentFilter: environmentFilter);
 
 // Register dependencies
+  locator.registerSingleton(SnackbarService());
   locator.registerSingleton(ConnectionStatusSingleton());
   locator.registerLazySingleton(() => ApiService());
   locator.registerLazySingleton(() => DashboardService());
