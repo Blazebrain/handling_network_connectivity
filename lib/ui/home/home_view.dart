@@ -48,9 +48,6 @@ class HomeView extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return Card(
                                 color: Colors.blue[300],
-                                // Colors.primaries[Random()
-                                //         .nextInt(Colors.primaries.length)]
-                                //     .withOpacity(0.5),
                                 elevation: 1.0,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(16),
