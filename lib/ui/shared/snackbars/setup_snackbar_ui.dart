@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:handling_network_connectivity/app/app.locator.dart';
 import 'package:handling_network_connectivity/utils/enums.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 Future<void> setupSnackBarUI() async {
-  // await locator.allReady();
-  final service = SnackbarService();
-
+  await locator.allReady();
+  final service = locator<SnackbarService>();
   // Registers a config to be used when calling showSnackbar
   service.registerCustomSnackbarConfig(
     variant: SnackbarType.positive,
